@@ -6,6 +6,8 @@ require 'pg'
 require './lib/survey'
 require './lib/question'
 require './lib/inquiry'
+require './lib/user'
+require './lib/answer'
 
 RSpec.configure do |config|
   config.after(:each) do

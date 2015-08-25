@@ -4,9 +4,10 @@ require 'spec_helper'
 Capybara.app = Sinatra::Application
 set(:show_exceptions, false)
 
-describe 'survey path', { type: :feature } do
+describe 'create survey path', { type: :feature } do
   it 'can add a new survey' do
     visit '/'
+    click_link 'Create Survey'
     click_link 'Add Survey'
     fill_in 'title', with: 'Election'
     click_button 'Submit'
@@ -48,6 +49,7 @@ describe 'survey path', { type: :feature } do
   it "deletes a survey from the index page" do
     survey = Survey.create({ title: 'hi' })
     visit '/'
+    click_link 'Create Survey'
     click_link 'delete'
     expect(page).not_to have_content 'Hi'
   end
@@ -81,5 +83,17 @@ describe 'questions path', { type: :feature } do
     fill_in 'reply', with: "reply"
     click_button "Submit Response"
     expect(page).to have_content "reply"
+  end
+end
+
+describe 'take survey path', { type: :feature } do
+  it 'allows user to enter name and select survey' do
+    survey = Survey.create({ title: 'title'})
+    visit "/"
+    click_link 'Take Survey'
+    fill_in 'name', with: "Jose"
+    click_button "Submit"
+    expect(page).to have_content "Jose"
+    expect(page).to have_content 'Title'
   end
 end

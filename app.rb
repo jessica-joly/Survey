@@ -6,9 +6,31 @@ require 'pry'
 require './lib/question'
 require './lib/survey'
 require './lib/inquiry'
+require './lib/user'
+require './lib/answer'
+
 
 get '/'  do
 	erb :index
+end
+
+get '/users/new' do
+	erb :user_form
+end
+
+post '/users' do
+	@user = User.create({ name: params['name'] })
+	redirect "/users/#{@user.id}/surveys"
+end
+
+get '/users/:id/surveys' do
+	@user = User.find(params['id'].to_i)
+  erb :user_surveys
+end
+
+
+get '/surveys' do
+	erb :surveys
 end
 
 get '/surveys/new'do
@@ -17,7 +39,7 @@ end
 
 post '/surveys' do
 	@survey = Survey.create({ title: params['title'] })
-	redirect "/"
+	redirect "/surveys"
 end
 
 get '/surveys/:id' do

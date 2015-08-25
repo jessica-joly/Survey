@@ -1,14 +1,3 @@
 <h1>Welcome to Your Incroyable Surveys</h1>
 
-<% if Survey.any? %>
-  <ul>
-    <% Survey.all.each do |survey| %>
-      <li><a href="/surveys/<%= survey.id %>"><%=survey.title %></a> | <a href="/delete/<%= survey.id %>" class='delete'>delete</a></li>
-    <% end %>
-  </ul>
-
-<% else %>
-  <p> There are no surveys!</p>
-<% end %>
-
-    <a href="/surveys/new">Add Survey</a>
+<a href="/surveys">Create Survey</a> <a href="/users/new">Take Survey</a>
