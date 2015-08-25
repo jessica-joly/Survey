@@ -20,4 +20,14 @@ describe 'survey path', { type: :feature } do
     click_button 'Submit'
     expect(page).to have_content "Do you like cheese?"
   end
+
+  it 'update the title of the survey' do
+    survey = Survey.create({:title => "title"})
+    visit "/surveys/#{survey.id}"
+    click_link 'Update Survey'
+    fill_in 'title', with: "Booboo"
+    click_button 'Submit'
+    expect(page).to have_content "Booboo"
+  end
+  
 end

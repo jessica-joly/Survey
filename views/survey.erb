@@ -6,6 +6,8 @@
   <% end %>
 </ul>
 
+<a href="/surveys/<%= @survey.id %>/edit">Update Survey</a>
+
 <form action="/questions" method="post">
   <div class='form-group'>
     <input type="hidden" name="survey_id" value="<%= @survey.id %>">

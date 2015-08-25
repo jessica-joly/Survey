@@ -24,6 +24,16 @@ get '/surveys/:id' do
 	erb :survey
 end
 
+get '/surveys/:id/edit' do
+	@survey = Survey.find(params['id'].to_i)
+  erb :survey_edit
+end
+
+patch '/surveys/:id' do
+  @survey = Survey.find(params['id'].to_i)
+	@survey.update({ title: params['title'] })
+	redirect "/surveys/#{@survey.id}"
+end
 
 post '/questions' do
 	@question = Question.create({ query: params['query'], survey_id: params['survey_id'] })
