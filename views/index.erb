@@ -3,7 +3,7 @@
 <% if Survey.any? %>
   <ul>
     <% Survey.all.each do |survey| %>
-      <li><%=survey.title %></li>
+      <li><a href="/surveys/<%= survey.id %>"><%=survey.title %></a></li>
     <% end %>
   </ul>
 
