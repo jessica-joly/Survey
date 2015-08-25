@@ -1,0 +1,14 @@
+<h1>Welcome to Your Incroyable Surveys</h1>
+
+<% if Survey.any? %>
+  <ul>
+    <% Survey.all.each do |survey| %>
+      <li><%=survey.title %></li>
+    <% end %>
+  </ul>
+
+<% else %>
+  <p> There are no surveys!</p>
+<% end %>
+
+    <a href="/surveys/new">Add Survey</a>
