@@ -57,6 +57,13 @@ patch '/questions/:id' do
 	redirect "surveys/#{@question.survey_id}"
 end
 
+delete '/questions/:id' do
+	@question = Question.find(params['id'].to_i)
+	@survey = Survey.find(@question.survey_id)
+	@question.destroy
+	redirect "/surveys/#{@survey.id}"
+end
+
 get '/delete/:id' do
   @survey = Survey.find(params['id'].to_i)
 	@survey.destroy

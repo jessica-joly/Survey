@@ -60,7 +60,15 @@ describe 'survey path', { type: :feature } do
     fill_in 'query', with: 'do you like ice cream?'
     click_button 'Submit'
     expect(page).to have_content 'do you like ice cream?'
+  end
 
+  it 'delete a question' do
+    survey = Survey.create({ title: 'hi' })
+    question = Question.create({query: "cheese?", survey_id: survey.id })
+    visit "/surveys/#{survey.id}"
+    click_link "#{question.query}"
+    click_button 'Delete'
+    expect(page).not_to have_content 'cheese?'
   end
 
 end

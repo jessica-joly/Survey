@@ -6,3 +6,10 @@
   </div>
   <button type='submit'>Submit</button>
 </form>
+
+<form action="/questions/<%= @question.id %>" method="post">
+  <div class='form-group'>
+    <input type="hidden" name="_method" value="delete">
+  </div>
+  <button type='submit'>Delete</button>
+</form>
