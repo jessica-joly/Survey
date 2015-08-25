@@ -1,0 +1,11 @@
+<form action="/answers" method="post">
+  <div class=form-group>
+    <label for="answer"><%= @question.query %></label>
+    <select  name="answer">
+      <% @replies.each do |reply| %>
+        <option value='<%= reply.id %>'><%= reply.reply %></option>
+        <% end %>
+    </select>
+  </div>
+  <button type='submit'>Submit</button>
+</form>

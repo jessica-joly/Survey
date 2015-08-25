@@ -96,4 +96,14 @@ describe 'take survey path', { type: :feature } do
     expect(page).to have_content "Jose"
     expect(page).to have_content 'Title'
   end
+
+  it 'allows a user to select a specific survey' do
+    @user = User.create({ name: 'name'})
+    @survey = Survey.create({ title: 'Title'})
+    @question = Question.create({ query: 'query', survey_id: @survey.id})
+    @inquiry = Inquiry.create({ reply: 'works!', question_id: @question.id})
+    visit "users/#{@user.id}/surveys"
+    click_link 'Title'
+    expect(page).to have_content "works!"
+  end
 end

@@ -19,13 +19,31 @@ get '/users/new' do
 end
 
 post '/users' do
-	@user = User.create({ name: params['name'] })
-	redirect "/users/#{@user.id}/surveys"
+	if  params['name'] != ''
+		@user = User.create({ name: params['name'] })
+		redirect "/users/#{@user.id}/surveys"
+  else
+		redirect '/users/new'
+	end
 end
 
 get '/users/:id/surveys' do
 	@user = User.find(params['id'].to_i)
   erb :user_surveys
+end
+
+get '/users/:id/surveys/:survey_id' do
+	@user = User.find(params['id'].to_i)
+  @survey = Survey.find(params['survey_id'].to_i)
+	redirect "users/#{@user.id}/surveys/#{@survey.id}/questions/#{@survey.questions.first.id}"
+end
+
+get '/users/:id/surveys/:survey_id/questions/:question_id' do
+	@user = User.find(params['id'].to_i)
+	@survey = Survey.find(params['survey_id'].to_i)
+	@question = Question.find(params['question_id'].to_i)
+	@replies = @question.inquiries
+  erb :reply_form
 end
 
 
