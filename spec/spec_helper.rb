@@ -5,6 +5,7 @@ require 'pg'
 
 require './lib/survey'
 require './lib/question'
+require './lib/inquiry'
 
 RSpec.configure do |config|
   config.after(:each) do
@@ -12,6 +13,9 @@ RSpec.configure do |config|
       task.destroy
     end
     Survey.all.each do |task|
+      task.destroy
+    end
+    Inquiry.all.each do |task|
       task.destroy
     end
   end

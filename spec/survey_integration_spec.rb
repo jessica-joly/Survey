@@ -51,14 +51,16 @@ describe 'survey path', { type: :feature } do
     click_link 'delete'
     expect(page).not_to have_content 'Hi'
   end
+end
 
+describe 'questions path', { type: :feature } do
   it 'updates a question' do
     survey = Survey.create({ title: 'hi' })
     question = Question.create({query: "cheese?", survey_id: survey.id })
     visit "/surveys/#{survey.id}"
     click_link "#{question.query}"
     fill_in 'query', with: 'do you like ice cream?'
-    click_button 'Submit'
+    click_button 'Submit Question'
     expect(page).to have_content 'do you like ice cream?'
   end
 
@@ -71,4 +73,13 @@ describe 'survey path', { type: :feature } do
     expect(page).not_to have_content 'cheese?'
   end
 
+  it 'adds a response to a question' do
+    survey = Survey.create({ title: 'hi' })
+    question = Question.create({query: "cheese?", survey_id: survey.id })
+    visit "/surveys/#{survey.id}"
+    click_link "#{question.query}"
+    fill_in 'reply', with: "reply"
+    click_button "Submit Response"
+    expect(page).to have_content "reply"
+  end
 end

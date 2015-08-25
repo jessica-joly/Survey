@@ -5,6 +5,7 @@ require 'sinatra/reloader'
 require 'pry'
 require './lib/question'
 require './lib/survey'
+require './lib/inquiry'
 
 get '/'  do
 	erb :index
@@ -68,4 +69,10 @@ get '/delete/:id' do
   @survey = Survey.find(params['id'].to_i)
 	@survey.destroy
 	redirect "/"
+end
+
+post '/inquiries' do
+	@question = Question.find(params['question_id'].to_i)
+	@reply = Inquiry.create({ reply: params['reply'], question_id: params['question_id'].to_i })
+	redirect "/questions/#{@reply.question_id}/edit"
 end

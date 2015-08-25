@@ -1,15 +1,36 @@
+<h4><%= @question.query %></h4>
+
+<ul>
+  <% @question.inquiries.each do |q| %>
+    <li><%= q.reply %></li>
+  <% end %>
+</ul>
+
 <form action="/questions/<%= @question.id %>" method="post">
   <div class='form-group'>
     <input type="hidden" name="_method" value="patch">
-    <label for="query">Enter your question</label>
+    <label for="query">Update your question</label>
     <input type="text" name="query" class='form-control'>
   </div>
-  <button type='submit'>Submit</button>
+  <button type='submit'>Submit Question</button>
 </form>
 
+<form action="/inquiries" method="post">
+  <div class='form-group'>
+    <input type="hidden" name="question_id" value="<%= @question.id %>">
+    <label for="reply">Enter a response</label>
+    <input type="text" name="reply" class='form-control'>
+  </div>
+  <button type='submit'>Submit Response</button>
+</form>
+
+
+<h4>Delete Question</h4>
 <form action="/questions/<%= @question.id %>" method="post">
   <div class='form-group'>
     <input type="hidden" name="_method" value="delete">
   </div>
   <button type='submit'>Delete</button>
 </form>
+
+<a href="/surveys/<%= @question.survey_id %>">Survey</a>
