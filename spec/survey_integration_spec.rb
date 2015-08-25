@@ -45,4 +45,11 @@ describe 'survey path', { type: :feature } do
     expect(page).to have_content 'Hi'
   end
 
+  it "deletes a survey from the index page" do
+    survey = Survey.create({ title: 'hi' })
+    visit '/'
+    click_link 'delete'
+    expect(page).not_to have_content 'Hi'
+  end
+
 end
