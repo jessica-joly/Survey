@@ -46,6 +46,17 @@ post '/questions' do
 	redirect "surveys/#{@question.survey_id}"
 end
 
+get '/questions/:id/edit' do
+  @question = Question.find(params['id'].to_i)
+	erb :question_edit
+end
+
+patch '/questions/:id' do
+  @question = Question.find(params['id'].to_i)
+	@question.update({ query: params['query'] })
+	redirect "surveys/#{@question.survey_id}"
+end
+
 get '/delete/:id' do
   @survey = Survey.find(params['id'].to_i)
 	@survey.destroy

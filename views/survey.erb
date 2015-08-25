@@ -2,12 +2,13 @@
 
 <ul>
   <% @survey.questions.each do |question| %>
-    <li><%= question.query %></li>
+    <li><a href="/questions/<%= question.id %>/edit"><%= question.query %></a></li>
   <% end %>
 </ul>
 
 <a href="/surveys/<%= @survey.id %>/edit">Update Survey</a>
-
+<br>
+<br>
 <form action="/questions" method="post">
   <div class='form-group'>
     <input type="hidden" name="survey_id" value="<%= @survey.id %>">
@@ -17,6 +18,6 @@
   <button type='submit'>Submit</button>
 </form>
 
-<a href="/questions/new">Add Question</a>
+
 <br>
 <a href="/">Back</a>

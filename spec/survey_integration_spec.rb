@@ -52,4 +52,15 @@ describe 'survey path', { type: :feature } do
     expect(page).not_to have_content 'Hi'
   end
 
+  it 'updates a question' do
+    survey = Survey.create({ title: 'hi' })
+    question = Question.create({query: "cheese?", survey_id: survey.id })
+    visit "/surveys/#{survey.id}"
+    click_link "#{question.query}"
+    fill_in 'query', with: 'do you like ice cream?'
+    click_button 'Submit'
+    expect(page).to have_content 'do you like ice cream?'
+
+  end
+
 end
